@@ -306,3 +306,97 @@
     ```javascript
     for(;; i++, j++){...} // for에서 자주 쓰인다
     ```
+### 문장
+* 중괄호를 사용해 여러 문장을 한 복합문으로 묶을 수 있다.
+* for, if는 다음에 하나의 하위문만을 허용하기 때문에 여러 문장을 한 복합문으로 묶는 중괄호를 쓰게 된다.
+* 선언문
+  * 변수
+    * 초기화 하지 않은 변수는 undefined
+    * 같은 변수를 여러번 선언해도 괜찮다
+    ```javascript
+    var i = 0;
+    var i = 1; // ok
+    ```
+  * 함수
+    * 함수 정의 표현식
+      * `var f = function(x){ return x; }`
+      * 변수 선언만 hoisting 된다
+      * delete 불가
+    * 함수 선언문
+      * `function f(x){ return x; }`
+      * 함수 이름과 정의 모두 hoisting 된다
+* 조건문
+  * switch에서 ===를 사용한다. 즉, 타입 변환 없이 같아야 한다
+  * switch에서 정수 아닌 타입들도 사용 가능 하다
+* 루프
+  * for/in
+    * in 다음에 객체가 오면 좌변의 변수에는 객체의 property 이름이 들어간다
+    * 좌변에는 할당 표현식에 적합한 무언가가 오면 되는데 이 식은 매 루프마다 평가된다
+      ```javascript
+      var obj = { x: 1, y: 2, z: 3 };
+      var a = [?], i=0
+      for(a[i++] in obj);   // a = ["x", "y", "z"]
+      ```
+    * for/in 바디에서 열거되기 전인 property를 삭제하거나 새 property를 추가하는 경우 이 property는 열거되지 않는다 (후자의 경우 되는 구현체도 있음)
+* 점프문
+  * 레이블
+  * break문은 함수 선언문에는 사용 할 수 없기 때문에 break로 함수 밖으로 나갈 수 없다
+  * break문에 레이블이 붙은 경우 if의 바디, 중괄호로 묶인 복합문에도 쓸 수 있다
+  * continue는 레이블이 붙어도 루프나 switch에서만 쓸 수 있다
+  ```javascript
+  outer_loop: while(i--){
+    while(j--){
+      if( /* break case */ ) break outer_loop;
+      if( /* continue case */) continue outer_loop;
+    }
+  }
+  ```
+  * `return;` 는 undefined를 return 한다
+  * throw, try/catch/finally
+    * throw는 catch를 찾을 때까지 함수 호출 스택을 거슬러 올라간다
+    * throw에서 Error wrapper 객체를 많이 쓴다
+    * finally
+      * 한번 try문에 진입했다면 finally는 무조건 실행된다
+      * break, continue, return 의 경우에도 실행된다
+      * throw된 에러가 catch를 못찾은 경우도 finally를 실행한뒤 호출 스택 위로 전파된다
+      * finally 안에서 에러가 발생한 경우 원래 에러 대신 이 에러가 전파된다
+      * finally 안에서 return 하면 에러가 처리되지 않았더라도 정상 종료 된다.
+    ```javascript
+    try{
+      // ...
+      throw Error("Error message");
+    }catch(e){
+      // handle error
+    }finally{
+      // close resources
+    }
+    ```
+* 기타
+  * with
+    * 바디를 수행하는 동안 변수 유효볌위 앞에 chain에 받은 객체를 추가한다
+    * Strict 모드에서는 쓸 수 없고, strict모드가 아니더라도 성능문제로 쓰지 않는 것이 좋다
+    ```javascript
+    var obj = { x: 1, y: 2 };
+    with(obj){
+      x = 4;    //o bj.x
+    }
+    ```
+  * debugger
+    * ECMAScript5 부터 공식적으로 추가되었다
+    * 프로그램 수행을 중단하고 debugger를 실행한다
+    ```javascript
+    function foo(x){                // 이 함수를 인자 없이 부르는 부분을 찾고싶다면
+      if(x === undefined) debugger; // 이렇게 할 수 있다
+    }
+    ```
+  * "use strict"
+    * ECMAScript5 부터 공식적으로 추가되었다
+    * Strict mode가 된다
+    * 스크립트나 함수 시작부에 실제 실행문 전에 오면 된다
+    * 꼭 첫 문장일 필요는 없다
+    ```javascript
+    function(){
+      "use stric";
+      // 실제 실행문
+    }
+    ```
