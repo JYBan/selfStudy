@@ -1,11 +1,48 @@
 ## std::pair
-* #include<utility>
-  * c++11에서 std::map의 element가 std::pair로 구현되어 있으므로 #include<map>을 해도 되긴 된다.
-  * make_pair()
+* 사용
+  * include \<utility>
+    * c++11에서 std::map의 element가 std::pair로 구현되어 있으므로 include \<map>을 해도 되긴 된다.
+  * template
+    * T1
+    * T2
+* member variables
+  * `first` : pair의 첫 번째 원소
+  * `second` : pair의 두 번째 원소
+* non-member functions
+  * `std::make_pair()` : include \<utility>
+  * `std::get<>()` : include \<utility>
+    1. index 이용 (index는 0 or 1)
+    2. type 이용 (두 원소의 타입이 서로 달라야 함)
+* example
+
     ```c++
-    std::pair<int, std::string> p = make_pair(3, "example"); // 암시적 형변환 가능
+    // 생성
+    std::pair<int, std::string> p1(3, "example");
+    auto p2 = std::make_pair(1, 3.14); // 암시적 형변환 가능
+
+    // 접근
+    p1.first;              // 3
+    std::get<0>(p2);       // 1
+    std::get<double>(p2);  // 3.14
     ```
-## std::tuple
+## std::tuple (c++11)
+* 사용
+  * include \<tuple>
+  * template
+    * Types...
+* helper classes
+  * std::ignore
+* non-member functions
+  * std::make_tuple : include \<tuple>
+  * std::tie
+  * std::get
+* example
+
+  ```c++
+  // 생성
+  std::tuple<int, char, double> t1(1, 'c', 3.4);
+  auto t2 = std::make_tuple("test", 3.1, 14);
+  ```
 ## std::array (c++11)
 ## std::list
 ## std::forward_list (c++11)
@@ -26,7 +63,7 @@
   * template
     * T
     * Allocator = std::allocator<T>
-* method
+* member functions
   * 접근
     * `operator[]`
     * `at(int index)` : operator[]와 달리 주어진 index가 범위 안인지를 체크한다
@@ -63,7 +100,7 @@
   * template
     * T
     * Container = std::deque<T>
-* method
+* member functions
   * 접근
     * `front()`
     * `back()`
@@ -83,7 +120,7 @@
   * template
     * T
     * Container = std::deque<T>
-* method
+* member functions
   * 접근
     * `top()`
   * 삽입/삭제
@@ -102,7 +139,7 @@
     * T
     * Container = std::vector<T>
     * Compare = std::less\<typename Container::value_type>
-* method
+* member functions
   * 접근
     * `top()`
   * 삽입/삭제
