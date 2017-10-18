@@ -1,5 +1,8 @@
-# std::pair & std::tuple
-## std::pair
+## TODO
+
+# General
+## std::pair & std::tuple
+### std::pair
 * 사용
   * include \<utility>
     * c++11에서 std::map의 element가 std::pair로 구현되어 있으므로 include \<map>을 해도 되긴 된다.
@@ -26,7 +29,7 @@
     std::get<0>(p2);       // 1
     std::get<double>(p2);  // 3.14
     ```
-## std::tuple (c++11)
+### std::tuple (c++11)
 * 특징
   * std::pair를 assign 할 수 있다 (예제 참고)
 * 사용
@@ -68,15 +71,16 @@
   // concat
   auto t3 = std::tuple_cat(t1, std::make_pair("Foo", "bar"), std::tie(i));
   ```
-## std::array (c++11)
-## std::list
-## std::forward_list (c++11)
-## std::unordered_set (c++11)
-## std::set
-## std::unordered_map (c++1)
-## std::map
-## std::future (c++11)
-## std::vector
+
+## algorithm
+### std::max
+### std::min
+## functional
+### std::function
+
+# Container
+## Containers - Sequence
+### std::vector
 * 특징
   * 일반 array와 같이 원소들이 연속된 주소 공간에 할당된다
     * random access가 빠르다
@@ -112,10 +116,24 @@
       * `erase(iterator first, iterator last)` : first 부터 last 전 원소까지 삭제
     * `emplace(iterator position, Args&&... args)` : 임시 객체를 만들지 않고 바로 새 자리에서 생성해서 원소를 삽입 (c++11)
     * `swap(vector x)` : x와 원소들을 swap (c++11)
+### std::array (c++11)
+### std::deque
+### std::list
+### std::forward_list (c++11)
 
-# Container Adapter
+## Containers - Associative
+### std::map
+### std::unordered_map (c++1)
+### std::set
+### std::unordered_set (c++11)
+### std::multimap
+### std::unordered_multimap
+### std::multiset
+### std::unordered_multiset
+
+## Container Adapter
 (현재까지 아래 3가지 종류)
-## std::queue
+### std::queue
 * 특징
   * Container adapter로 내부 container의 인터페이스를 FIFO로 제한해주는 wrapper
   * 내부 container는 back(), front(), push_back(), pop_front()를 지원해야 함 ex) deque, list
@@ -135,7 +153,7 @@
     * `emplace(Args&&... args)` : 임시 객체를 만들지 않고 바로 새 자리에서 생성해서 원소를 삽입 (c++11)
     * `swap(queue x)` : x와 원소들을 swap (c++11)
 
-## std::stack
+### std::stack
 * 특징
   * Container adapter로 내부 container의 인터페이스를 LIFO로 제한해주는 wrapper
   * 내부 container는 back(), push_back(), pop_back()을 지원해야 함 ex) vector, deque, list
@@ -154,7 +172,7 @@
     * `emplace(Args&&... args)` : 임시 객체를 만들지 않고 바로 새 자리에서 생성해서 원소를 삽입 (c++11)
     * `swap(stack x)` : x와 원소들을 swap (c++11)
 
-## std::priority_queue
+### std::priority_queue
 * 특징
   * 내부 container는 front(), push_back(), pop_back()을 지원해야 함 ex) vector, deque
   * compare에는 less, greator, functor가 올 수 있다
@@ -172,3 +190,13 @@
     * `pop()` : 앞에서 삭제
     * `emplace(Args&&... args)` : 임시 객체를 만들지 않고 바로 새 자리에서 생성해서 원소를 삽입 후 정렬 (c++11)
     * `swap(priority_queue x)` : x와 원소들을 swap (c++11)
+
+# Thread Support Library
+### std::thread (c++11)
+### std::condition_variable (c++11)
+### std::future (c++11)
+### std::mutex (c++11)
+
+# Strings
+## std::string
+## std::regex
