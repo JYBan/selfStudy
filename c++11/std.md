@@ -1,3 +1,4 @@
+# std::pair & std::tuple
 ## std::pair
 * 사용
   * include \<utility>
@@ -8,9 +9,9 @@
 * member variables
   * `first` : pair의 첫 번째 원소
   * `second` : pair의 두 번째 원소
-* non-member functions
-  * `std::make_pair()` : include \<utility>
-  * `std::get<>()` : include \<utility>
+* non-member functions (include \<utility>)
+  * `std::make_pair()`
+  * `std::get<>()`
     1. index 이용 (index는 0 or 1)
     2. type 이용 (두 원소의 타입이 서로 달라야 함)
 * example
@@ -26,22 +27,46 @@
     std::get<double>(p2);  // 3.14
     ```
 ## std::tuple (c++11)
+* 특징
+  * std::pair를 assign 할 수 있다 (예제 참고)
 * 사용
   * include \<tuple>
   * template
-    * Types...
+    * Types... : 최대 10
 * helper classes
-  * std::ignore
-* non-member functions
-  * std::make_tuple : include \<tuple>
-  * std::tie
-  * std::get
+  * `std::ignore`
+    * 어떤 값이든 올 수 있음
+    * tuple을 unpack 할 때 placeholder로 씀
+* non-member functions (include \<tuple>)
+  * `std::make_tuple()`
+  * `std::get<>()`
+    1. index 이용
+    2. type 이용 (해당 타입이 유일해야 함)
+  * `std::tie()`
+    * 받은 lvalue reference들 또는 std::ignore 로 tuple을 만듦
+    * tuple의 원소들을 unpack 할 때 씀
+  * `std::tuple_cat()` : arguments로 받은 tuple 또는 pair를 연결한 tuple 반환 (예제 참고)
 * example
 
   ```c++
   // 생성
   std::tuple<int, char, double> t1(1, 'c', 3.4);
   auto t2 = std::make_tuple("test", 3.1, 14);
+
+  // std::pair 할당
+  t1 = std::make_pair(3, 'd');  // t1 = (3, 'd', 3.4)
+
+  // 접근
+  std::get<0>(t2);       // "test"
+  std::get<double>(t2);  // 3.1
+
+  // unpack
+  int i;
+  char c;
+  std::tie(i, c, std::ignore) = t1;
+
+  // concat
+  auto t3 = std::tuple_cat(t1, std::make_pair("Foo", "bar"), std::tie(i));
   ```
 ## std::array (c++11)
 ## std::list
