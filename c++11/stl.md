@@ -102,7 +102,7 @@
   * 삽입/삭제
     * assign
       * `assign(InputIterator begin, InputIterator end)` : begin부터 end 전까지 요소를 카피해 할당
-      * `assign(int num, value_type val)` : num개 원소에 val을 할당
+      * `assign(int num, value_type val)` : num개 원소에 val을 할당
       * `assign(initializer_list<value_type> il)`
     * `push_back(value_type val)`
     * `pop_back()`
@@ -118,6 +118,35 @@
     * `swap(vector x)` : x와 원소들을 swap (c++11)
 ### std::array (c++11)
 ### std::deque
+* 특징
+  * double ended queue
+* 사용
+  * include \<deque>
+  * template
+    * T
+    * Allocator = std::allocator<T>
+* member functions / operators
+  * '[]`
+  * `begin()`
+  * `end()`
+  * `at()`
+  * `front()`
+  * `back()`
+* 삽입/삭제
+  * `push_back()`
+  * `pop_back()`
+  * `push_front()`
+  * `pop_back()`
+  * `erase()`
+  * `clear()`
+  * `emplace()`
+  * `emplace_back()`
+  * `emplace_front()`
+ 
+ 
+ 
+ 
+
 ### std::list
 ### std::forward_list (c++11)
 
